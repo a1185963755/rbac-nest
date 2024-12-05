@@ -34,7 +34,7 @@ import { PermissionGuard } from './common/guard/permission.guard';
     JwtModule.register({
       global: true,
       secret: 'oliver',
-      signOptions: { expiresIn: '1d' },
+      signOptions: { expiresIn: '30m' },
     }),
     AaaModule,
     BbbModule,
