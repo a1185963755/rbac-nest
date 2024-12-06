@@ -35,4 +35,9 @@ export class User {
     name: 'user_role_relation',
   })
   roles: Role[];
+
+  @Column({
+    length: 50,
+  })
+  githubID: string;
 }

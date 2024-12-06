@@ -95,4 +95,16 @@ export class UserController {
       throw new UnauthorizedException('token 已失效，请重新登录');
     }
   }
+
+  @IsPublic()
+  @UseGuards(AuthGuard('github'))
+  @Get('github-login')
+  async githubLogin() {}
+
+  @Get('callback')
+  @IsPublic()
+  @UseGuards(AuthGuard('github'))
+  async authCallback(@Req() req) {
+    return req.user;
+  }
 }
