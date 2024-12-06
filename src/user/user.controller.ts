@@ -6,11 +6,16 @@ import {
   Inject,
   Query,
   UnauthorizedException,
+  UseGuards,
+  Req,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 
 import { UserLoginDto } from './dto/user-login.dto';
 import { JwtService } from '@nestjs/jwt';
+import { AuthGuard } from '@nestjs/passport';
+import { Request } from 'express';
+import { IsPublic } from 'src/common/decorator/is-public/is-public.decorator';
 
 @Controller('user')
 export class UserController {
@@ -22,8 +27,10 @@ export class UserController {
   init() {
     return this.userService.initData();
   }
+  @IsPublic()
+  @UseGuards(AuthGuard('local'))
   @Post('login')
-  async login(@Body() loginUser: UserLoginDto) {
+  async login(@Body() loginUser: UserLoginDto, @Req() request: Request) {
     const user = await this.userService.login(loginUser);
     const access_token = this.jwtService.sign(
       {

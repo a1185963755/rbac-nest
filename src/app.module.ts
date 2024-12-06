@@ -11,6 +11,8 @@ import { AaaModule } from './aaa/aaa.module';
 import { BbbModule } from './bbb/bbb.module';
 import { LoginGuard } from './common/guard/login.guard';
 import { PermissionGuard } from './common/guard/permission.guard';
+import { AuthModule } from './auth/auth.module';
+import { JwtAuthGuard } from './common/guard/jwt-auth.guard';
 
 @Module({
   imports: [
@@ -38,17 +40,22 @@ import { PermissionGuard } from './common/guard/permission.guard';
     }),
     AaaModule,
     BbbModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [
     AppService,
+    // {
+    //   provide: 'APP_GUARD',
+    //   useClass: LoginGuard,
+    // },
+    // {
+    //   provide: 'APP_GUARD',
+    //   useClass: PermissionGuard,
+    // },
     {
       provide: 'APP_GUARD',
-      useClass: LoginGuard,
-    },
-    {
-      provide: 'APP_GUARD',
-      useClass: PermissionGuard,
+      useClass: JwtAuthGuard,
     },
   ],
 })

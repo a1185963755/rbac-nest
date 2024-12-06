@@ -10,11 +10,9 @@ import {
 import { BbbService } from './bbb.service';
 import { CreateBbbDto } from './dto/create-bbb.dto';
 import { UpdateBbbDto } from './dto/update-bbb.dto';
-import { RequireLogin } from 'src/common/decorator/custom/custom.decorator';
 import { RequirePermission } from 'src/common/decorator/require-permission/require-permission.decorator';
 
 @Controller('bbb')
-@RequireLogin()
 export class BbbController {
   constructor(private readonly bbbService: BbbService) {}
 

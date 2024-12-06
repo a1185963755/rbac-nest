@@ -124,4 +124,11 @@ export class UserService {
       },
     });
   }
+  async findOne(username: string) {
+    return await this.entityManager.findOne(User, {
+      where: {
+        username,
+      },
+    });
+  }
 }

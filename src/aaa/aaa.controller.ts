@@ -6,14 +6,18 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { AaaService } from './aaa.service';
 import { CreateAaaDto } from './dto/create-aaa.dto';
 import { UpdateAaaDto } from './dto/update-aaa.dto';
 import { RequireLogin } from 'src/common/decorator/custom/custom.decorator';
+import { AuthGuard } from '@nestjs/passport';
+import { IsPublic } from 'src/common/decorator/is-public/is-public.decorator';
 
 @Controller('aaa')
 @RequireLogin()
+@IsPublic()
 export class AaaController {
   constructor(private readonly aaaService: AaaService) {}
 
