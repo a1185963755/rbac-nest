@@ -101,10 +101,22 @@ export class UserController {
   @Get('github-login')
   async githubLogin() {}
 
-  @Get('callback')
+  // @Get('callback/github')
+  // @IsPublic()
+  // @UseGuards(AuthGuard('github'))
+  // async authCallback(@Req() req) {
+  //   return req.user;
+  // }
+
   @IsPublic()
-  @UseGuards(AuthGuard('github'))
-  async authCallback(@Req() req) {
+  @UseGuards(AuthGuard('google'))
+  @Get('google-login')
+  async googleLogin() {}
+
+  @IsPublic()
+  @Get('callback/google')
+  @UseGuards(AuthGuard('google'))
+  async googleAuthCallback(@Req() req) {
     return req.user;
   }
 }

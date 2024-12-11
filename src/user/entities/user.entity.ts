@@ -9,6 +9,10 @@ import {
 } from 'typeorm';
 import { Role } from './role.entity';
 
+export enum RegisterType {
+  normal = 1,
+  github = 2,
+}
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
@@ -40,4 +44,10 @@ export class User {
     length: 50,
   })
   githubID: string;
+
+  @Column({
+    comment: '注册类型: 1.用户名密码注册 2. google自动注册',
+    default: 1,
+  })
+  registerType: RegisterType;
 }
